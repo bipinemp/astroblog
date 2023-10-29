@@ -1,0 +1,20 @@
+---
+import Search from "./icon/Search.astro";
+
+type Props = {
+  name: string;
+};
+
+type IconMap = {
+  [key: string]: (_props: Record<string, any>) => any;
+};
+
+const iconMap: IconMap = {
+  search: Search,
+};
+
+const { name } = Astro.props;
+const IconComponent = iconMap[name];
+---
+
+<IconComponent />

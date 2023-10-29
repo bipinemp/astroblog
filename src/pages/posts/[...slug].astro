@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import Container from "../../layouts/Container.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+type Props = {
+  entry: CollectionEntry<"posts">;
+};
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Container>
+  <div class="flex flex-col gap-3 mb-10">
+    <div class="mx-auto prose prose-xl overflow-visible dark:prose-invert">
+      <Content />
+    </div>
+  </div>
+</Container>

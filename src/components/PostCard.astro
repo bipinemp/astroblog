@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from "astro:content";
+type Props = {
+  post: CollectionEntry<"posts">;
+};
+
+const { post } = Astro.props;
+const { title, description, date, tags } = post.data;
+---
+
+<article
+  class="flex flex-col gap-5 justify-between border-[2px] rounded-lg border-white py-10 px-5"
+>
+  <div class="flex flex-col gap-2">
+    <h1 class="font-semibold text-4xl tracking-wide">{title}</h1>
+    <time datetime={date.toISOString()} class="text-gray-400">
+      {
+        date.toLocaleDateString(undefined, {
+          dateStyle: "medium",
+          timeZone: "UTC",
+        })
+      }
+    </time>
+    <div class="flex items-center gap-4">
+      {
+        tags.map((tag) => (
+          <p class="border-[1px] text-sm font-semibold tracking-wide border-gray-400 w-fit p-2 px-3 rounded-md">
+            {tag}
+          </p>
+        ))
+      }
+    </div>
+  </div>
+
+  <div>
+    <p class="text-lg text-gray-200">{description}</p>
+  </div>
+  <a
+    href={`/posts/${post.slug}`}
+    class="w-fit py-2 px-4 bg-blue-700 font-semibold rounded tracking-wide hover:opacity-80 transition"
+    >Read More...</a
+  >
+</article>
