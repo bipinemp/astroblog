@@ -116,7 +116,7 @@ const async function( page:string ){
   if (page === 1 || page === 2 ){
     console.log("This is 1 or 2 " + page);
   } else {
-    console.log("I don't know.");
+    console.log("I don't know..");
   }
 }
 ```
